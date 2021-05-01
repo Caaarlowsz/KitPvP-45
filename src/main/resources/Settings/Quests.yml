@@ -1,0 +1,42 @@
+Menu:
+  Title: "name"
+  Rows: 4
+  Background:
+    ID: 160
+    Data: 2
+Quests:
+  Daily:
+    Killing:
+      Name: "&cKilling"
+      Types:
+        1:
+          # Kills
+          Amount: 15
+          # Quest time limit
+          Time: 300
+          Description:
+            - "&7Kill 15 players"
+            - "&7in 5 minutes."
+        2:
+          Amount: 30
+          Time: 600
+          Description:
+            - "&7Kill 30 players"
+            - "&7in 10 minutes."
+    Survive:
+      Name: "&aSurvive"
+      Types:
+        1:
+          # Survive time
+          Amount: 180
+          # Quest time limit
+          Time: 600
+          Description:
+            - "&7Survive 3 minutes"
+            - "&7inside the map."
+        2:
+          Amount: 360
+          Time: 900
+          Description:
+            - "&7Survive 6 minutes"
+            - "&7inside the map."

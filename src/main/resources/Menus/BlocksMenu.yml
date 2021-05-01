@@ -1,0 +1,31 @@
+Title: "&5Blocks"
+Rows: 3
+Background:
+  Enable: true
+  ID: STAINED_GLASS_PANE
+  Data: 15
+Items:
+  Stone:
+    Name: "&7Stone Block"
+    ID: STONE
+    Data: 0
+    Description:
+      - "&f"
+    Price: 5000.0
+    Amount: 64
+  Glass:
+    Name: "&aGlass Block"
+    ID: STAINED_GLASS
+    Data: 3
+    Description:
+      - "&f"
+    Price: 5000.0
+    Amount: 64
+  Wool:
+    Name: "&7Wool Block"
+    ID: WOOL
+    Data: 5
+    Description:
+      - "&f"
+    Price: 5000.0
+    Amount: 64

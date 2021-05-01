@@ -1,0 +1,11 @@
+name: KitPvP
+version: 1.0
+author: GabrielHD55
+main: com.gabrielhd.kitpvp.KitPvP
+description: "Inject KitPvP plugin"
+depend: [Guns]
+commands:
+  kitpvp:
+    usage: /<command>
+  coins:
+    usage: /<command>

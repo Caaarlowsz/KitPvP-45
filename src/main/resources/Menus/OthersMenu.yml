@@ -1,0 +1,17 @@
+Title: "&7Others"
+Rows: 6
+Background:
+  Enable: false
+  ID: STAINED_GLASS_PANE
+  Data: 15
+Items:
+  1:
+    Name: "&aOthers"
+    ID: GOLDEN_APPLE
+    Data: 1
+    Description:
+      - "&f"
+    Slot: 10
+    Price: 500000.0
+    Commands:
+      - "give %player% golden_apple:1 15"

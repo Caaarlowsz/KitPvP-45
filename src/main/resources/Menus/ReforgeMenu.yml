@@ -1,0 +1,35 @@
+Title: "Name"
+Rows: 5
+Background:
+  Enable: false
+  ID: STAINED_GLASS_PANE
+  Data: 15
+Rarity:
+  Uncommon:
+    Name: "&7Uncommon"
+    ID: STAINED_GLASS_PANE
+    Data: 7
+    Description:
+      - "&f"
+    Price: 5000.0
+  Rare:
+    Name: "&eRare"
+    ID: STAINED_GLASS_PANE
+    Data: 4
+    Description:
+      - "&f"
+    Price: 5000.0
+  Legendary:
+    Name: "&6Legendary"
+    ID: STAINED_GLASS_PANE
+    Data: 1
+    Description:
+      - "&f"
+    Price: 5000.0
+  Exotic:
+    Name: "&5Exotic"
+    ID: STAINED_GLASS_PANE
+    Data: 10
+    Description:
+      - "&f"
+    Price: 5000.0

@@ -1,0 +1,51 @@
+Title: "&cGuns"
+Rows: 3
+Background:
+  Enable: true
+  ID: STAINED_GLASS_PANE
+  Data: 15
+Items:
+  1:
+    Name: "&aAk-47"
+    ID: RECORD_7
+    Data: 0
+    Description:
+      - "&f"
+    Slot: 10
+    Price: 30000.0
+    Guns:
+      Type: Ak-47
+      Rarity: Uncommon
+  2:
+    Name: "&aDesert Eagle"
+    ID: RECORD_3
+    Data: 0
+    Description:
+      - "&f"
+    Slot: 12
+    Price: 20000.0
+    Guns:
+      Type: DesertEagle
+      Rarity: Uncommon
+  3:
+    Name: "&aMAC-10"
+    ID: RECORD_6
+    Data: 0
+    Description:
+      - "&f"
+    Slot: 14
+    Price: 25000.0
+    Guns:
+      Type: MAC-10
+      Rarity: Uncommon
+  4:
+    Name: "&aAS50"
+    ID: RECORD_11
+    Data: 0
+    Description:
+      - "&f"
+    Slot: 16
+    Price: 20000.0
+    Guns:
+      Type: AS50
+      Rarity: Uncommon

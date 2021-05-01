@@ -1,0 +1,41 @@
+Title: "&6Store"
+Rows: 5
+Background:
+  Enable: true
+  ID: STAINED_GLASS_PANE
+  Data: 15
+Guns:
+  Name: "&eGuns Store"
+  Description:
+    - "&f"
+  ID: DIAMOND_PICKAXE
+  Data: 0
+  Slot: 10
+Ammo:
+  Name: "&eAmmo Store"
+  Description:
+    - "&f"
+  ID: ARROW
+  Data: 0
+  Slot: 16
+Armor:
+  Name: "&aArmor Store"
+  Description:
+    - "&f"
+  ID: DIAMOND_HELMET
+  Data: 0
+  Slot: 28
+Blocks:
+  Name: "&aBlocks Store"
+  Description:
+    - "&f"
+  ID: STONE
+  Data: 0
+  Slot: 22
+Others:
+  Name: "&aOthers"
+  Description:
+    - "&f"
+  ID: NETHER_STAR
+  Data: 0
+  Slot: 34

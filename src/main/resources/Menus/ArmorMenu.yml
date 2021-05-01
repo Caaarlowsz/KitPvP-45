@@ -1,0 +1,31 @@
+Title: "&aArmors"
+Rows: 3
+Background:
+  Enable: true
+  ID: STAINED_GLASS_PANE
+  Data: 15
+Items:
+  1:
+    Name: "&7&lMetal Chestplate"
+    ID: DIAMOND_CHESTPLATE
+    Data: 0
+    Description:
+      - "&5Rare"
+    Slot: 11
+    Price: 10000.0
+    Armor:
+      Slot: Chestplate
+      Type: Metal
+      Rarity: Uncommon
+  2:
+    Name: "&7&lMetal Boots"
+    ID: DIAMOND_BOOTS
+    Data: 0
+    Description:
+      - "&5Rare"
+    Slot: 15
+    Price: 10000.0
+    Armor:
+      Slot: Boots
+      Type: Metal
+      Rarity: Uncommon

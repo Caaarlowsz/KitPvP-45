@@ -1,0 +1,96 @@
+#Types: MySQL, SQLite, FlatFile
+StorageType: SQLite
+MySQL:
+  Host: 127.0.0.1
+  Port: 3306
+  TableName: "Data_"
+  Database: "Minigame"
+  Username: "Minigame"
+  Password: "Minigame123"
+
+Scoreboard:
+  Enable: true
+  Title: "&5&lInjectPvP"
+  Lines:
+    - "&f"
+    - "&fLevel&8: &7%level%"
+    - "&fExp&8: &7%xp%"
+    - "&fCoins&8: &7%coins%"
+    - "&f"
+    - "&fKills&8: &7%kills%"
+    - "&fDeaths&8: &7%deaths%"
+    - "&fKillStreak&8: &7%killstreak%"
+    - "&f"
+    - "&6injectpvp.net"
+
+ExpPerKillMax: 25
+ExpPerKillMin: 10
+CoinsPerKill: 50
+CoinsPerDeath: 10
+
+Levels:
+  Enable: true
+  2:
+    ExpRequired: 300
+    Rewards:
+      - "coins add %player% 100"
+  3:
+    ExpRequired: 500
+    Rewards:
+      - "coins add %player% 200"
+  4:
+    ExpRequired: 800
+    Rewards:
+      - "coins add %player% 300"
+  5:
+    ExpRequired: 1000
+    Rewards:
+      - "coins add %player% 400"
+  6:
+    ExpRequired: 1200
+    Rewards:
+      - "coins add %player% 500"
+  7:
+    ExpRequired: 1400
+    Rewards:
+      - "coins add %player% 600"
+  8:
+    ExpRequired: 1600
+    Rewards:
+      - "coins add %player% 700"
+  9:
+    ExpRequired: 1800
+    Rewards:
+      - "coins add %player% 800"
+  10:
+    ExpRequired: 2000
+    Rewards:
+      - "coins add %player% 900"
+  11:
+    ExpRequired: 2200
+    Rewards:
+      - "coins add %player% 1000"
+  12:
+    ExpRequired: 2400
+    Rewards:
+      - "coins add %player% 1500"
+  13:
+    ExpRequired: 2600
+    Rewards:
+      - "coins add %player% 2000"
+  14:
+    ExpRequired: 2800
+    Rewards:
+      - "coins add %player% 2500"
+  15:
+    ExpRequired: 3000
+    Rewards:
+      - "coins add %player% 3000"
+
+KillStreaks:
+  Enable: true
+  Streaks:
+    5:
+      - "effect %player% regeneration 1 20"
+    10:
+      - "coins add %player% 10"

@@ -1,0 +1,6 @@
+Title: "&6%player%"
+Rows: 4
+Background:
+  Enable: false
+  ID: STAINED_GLASS_PANE
+  Data: 15
