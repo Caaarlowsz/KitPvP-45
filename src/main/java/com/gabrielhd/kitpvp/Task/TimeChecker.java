@@ -10,7 +10,7 @@ public class TimeChecker implements Runnable {
 
     @Override
     public void run() {
-        YamlConfig date = new YamlConfig("cache.yml");
+        YamlConfig date = new YamlConfig("cache");
         String s = new SimpleDateFormat("dd").format(new Date());
         if(date.isSet("Date")){
             if(!date.getString("Date").equalsIgnoreCase(s)) {

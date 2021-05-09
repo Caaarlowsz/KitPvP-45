@@ -9,6 +9,7 @@ import com.gabrielhd.kitpvp.Listeners.LoginListeners;
 import com.gabrielhd.kitpvp.Listeners.PlayerListeners;
 import com.gabrielhd.kitpvp.Managers.*;
 import com.gabrielhd.kitpvp.Scoreboard.BoardBuilder;
+import com.gabrielhd.kitpvp.Task.SaveTask;
 import com.gabrielhd.kitpvp.Task.TimeChecker;
 import com.gabrielhd.kitpvp.Utils.LocationUtils;
 import com.google.common.collect.Lists;
@@ -50,6 +51,7 @@ public class KitPvP extends JavaPlugin {
         this.getCommand("coins").setExecutor(new CoinsCmd());
         this.getServer().getPluginManager().registerEvents(new LoginListeners(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, new SaveTask(), 1200L, 1200L);
         this.getServer().getScheduler().runTaskTimerAsynchronously(this, new TimeChecker(), 1200L, 1200L);
 
         if(configManager.getSettings().getBoolean("Scoreboard.Enable")) {
@@ -64,6 +66,20 @@ public class KitPvP extends JavaPlugin {
     @Override
     public void onDisable() {
         npcManager.destroy();
+    }
+
+
+    public void reload() {
+        this.aether.delete();
+        configManager = new ConfigManager(this);
+
+        if(configManager.getSettings().getBoolean("Scoreboard.Enable")) {
+            this.aether = new Aether(this, new BoardBuilder());
+        }
+
+        if(configManager.getRegions().isSet("LobbyLocation")) {
+            mainLobby = LocationUtils.StringToLocation(configManager.getRegions().getString("LobbyLocation"));
+        }
     }
 
     public static String Color(String a) {

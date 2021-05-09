@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class ShopMenu extends Menu {
 
@@ -69,6 +70,13 @@ public class ShopMenu extends Menu {
         if(shop.isSet("Others")) this.setItem(shop.getInt("Others.Slot"), ItemsBuild.crearItemEnch(Material.getMaterial(shop.getString("Others.ID")), 1, shop.getInt("Others.Data"), shop.getString("Others.Name"), shop.getStringList("Others.Description")));
         if(shop.isSet("Blocks")) this.setItem(shop.getInt("Blocks.Slot"), ItemsBuild.crearItemEnch(Material.getMaterial(shop.getString("Blocks.ID")), 1, shop.getInt("Blocks.Data"), shop.getString("Blocks.Name"), shop.getStringList("Blocks.Description")));
 
-
+        if(shop.isSet("Background") && shop.getBoolean("Background.Enable")) {
+            for (int i = 0; i < this.getInventory().getSize(); i++) {
+                ItemStack itemStack = this.getInventory().getItem(i);
+                if (itemStack == null || itemStack.getType() == Material.AIR) {
+                    this.setItem(i, ItemsBuild.crearItem(Material.getMaterial(shop.getString("Background.ID")), 1, shop.getInt("Background.Data"), "&f"));
+                }
+            }
+        }
     }
 }

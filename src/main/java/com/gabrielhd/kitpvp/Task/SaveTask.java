@@ -5,7 +5,6 @@ import com.gabrielhd.kitpvp.KitPvP;
 import com.gabrielhd.kitpvp.Player.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class SaveTask implements Runnable {
 

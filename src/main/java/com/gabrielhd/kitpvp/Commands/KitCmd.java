@@ -8,6 +8,7 @@ import com.gabrielhd.kitpvp.Player.OPPlayer;
 import com.gabrielhd.kitpvp.Utils.LocationUtils;
 import com.jitse.npclib.api.NPC;
 import com.jitse.npclib.api.skin.SkinFetcher;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +27,7 @@ public class KitCmd implements CommandExecutor {
                 player.sendMessage(KitPvP.Color(messages.getString("NoPermissions")));
                 return true;
             }
-            if(args.length <= 1 || args.length >= 5) {
+            if(args.length <= 0 || args.length >= 5) {
                 this.sendHelp(player);
                 return true;
             }
@@ -71,6 +72,27 @@ public class KitCmd implements CommandExecutor {
             }
 
             if(args.length == 3) {
+                Player target = Bukkit.getPlayer(args[0]);
+                if(target != null) {
+                    if(args[1].equalsIgnoreCase("setkit")) {
+                        String name = args[2];
+                        Kit kit = KitPvP.getKitsManager().getKit(name);
+                        if(kit != null) {
+                            target.getInventory().clear();
+
+                            target.getInventory().setContents(kit.getContents());
+                            target.getInventory().setArmorContents(kit.getArmor());
+                            target.updateInventory();
+                            return true;
+                        } else {
+                            player.sendMessage(KitPvP.Color("&cThis kit does not exist"));
+                        }
+                        return true;
+                    }
+                    this.sendHelp(player);
+                    return true;
+                }
+
                 if(args[0].equalsIgnoreCase("npc")) {
                     if(args[1].equalsIgnoreCase("spawn")) {
                         NPCType npcType = NPCType.getByName(args[2]);
@@ -90,7 +112,6 @@ public class KitCmd implements CommandExecutor {
                     this.sendHelp(player);
                     return true;
                 }
-
                 if(args[0].equalsIgnoreCase("kit")) {
                     if(args[1].equalsIgnoreCase("create")) {
                         String name = args[2];
@@ -243,12 +264,51 @@ public class KitCmd implements CommandExecutor {
                 this.sendHelp(player);
                 return true;
             }
+
+            if(args.length == 1) {
+                if(args[0].equalsIgnoreCase("reload")) {
+                    KitPvP.getInstance().reload();
+                    player.sendMessage(KitPvP.Color("&cReload complete"));
+                    return true;
+                }
+                return true;
+            }
             return true;
+        } else {
+            if(args.length == 1) {
+                if(args[0].equalsIgnoreCase("reload")) {
+                    KitPvP.getInstance().reload();
+                    sender.sendMessage(KitPvP.Color("&cReload complete"));
+                    return true;
+                }
+            } else if(args.length == 3) {
+                Player target = Bukkit.getPlayer(args[0]);
+                if(target != null) {
+                    if(args[1].equalsIgnoreCase("setkit")) {
+                        String name = args[2];
+                        Kit kit = KitPvP.getKitsManager().getKit(name);
+                        if(kit != null) {
+                            target.getInventory().clear();
+
+                            target.getInventory().setContents(kit.getContents());
+                            target.getInventory().setArmorContents(kit.getArmor());
+                            target.updateInventory();
+                            return true;
+                        } else {
+                            sender.sendMessage(KitPvP.Color("&cThis kit does not exist"));
+                        }
+                        return true;
+                    }
+                    this.sendHelp(sender);
+                    return true;
+                }
+                return true;
+            }
         }
         return false;
     }
 
-    public void sendHelp(Player player) {
+    public void sendHelp(CommandSender player) {
         FileConfiguration messages = KitPvP.getConfigManager().getMessages();
         for(String lines : messages.getStringList("KitpvpHelp")) {
             player.sendMessage(KitPvP.Color(lines));

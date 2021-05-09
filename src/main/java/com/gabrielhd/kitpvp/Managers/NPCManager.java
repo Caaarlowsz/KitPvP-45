@@ -26,10 +26,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class NPCManager implements Listener {
 
 	private final Map<UUID, CustomNPC> playerNpcs = Maps.newHashMap();
+	private static final Map<UUID, Long> cooldownPlayer = Maps.newHashMap();
     private final List<CustomNPC> npcs = new ArrayList<>();
     private final YamlConfig config;
 	private final NPCLib library;
@@ -185,13 +187,21 @@ public class NPCManager implements Listener {
 		}
 
 		if(npc.getNpcType() == NPCType.KIT) {
-			for(Kit kit : KitPvP.getKitsManager().getKits().values()) {
-				player.getInventory().clear();
+			if(System.currentTimeMillis() - cooldownPlayer.getOrDefault(player.getUniqueId(), 0L) > TimeUnit.SECONDS.toMillis(KitPvP.getConfigManager().getSettings().getInt("KitCooldown"))) {
+				cooldownPlayer.remove(player.getUniqueId());
 
-				player.getInventory().setContents(kit.getContents());
-				player.getInventory().setArmorContents(kit.getArmor());
-				player.updateInventory();
-				return;
+				for (Kit kit : KitPvP.getKitsManager().getKits().values()) {
+					if(kit.getName().equalsIgnoreCase(KitPvP.getConfigManager().getKits().getString("Default-Kit"))) {
+						player.getInventory().clear();
+
+						player.getInventory().setContents(kit.getContents());
+						player.getInventory().setArmorContents(kit.getArmor());
+						player.updateInventory();
+						break;
+					}
+				}
+
+				cooldownPlayer.put(player.getUniqueId(), System.currentTimeMillis());
 			}
 		}
     }

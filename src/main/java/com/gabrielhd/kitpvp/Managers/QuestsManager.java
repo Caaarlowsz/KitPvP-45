@@ -20,7 +20,7 @@ public class QuestsManager {
         this.dailyQuests.clear();
         this.weeklyQuests.clear();
 
-        YamlConfig cache = new YamlConfig("cache.yml");
+        YamlConfig cache = new YamlConfig("cache");
         String s = new SimpleDateFormat("dd").format(new Date());
         if(cache.isSet("Date")){
             if(!cache.getString("Date").equalsIgnoreCase(s)) {
@@ -35,9 +35,7 @@ public class QuestsManager {
                     Set<String> secList = cache.getConfigurationSection("Quests.Daily."+type).getKeys(false);
                     if (!secList.isEmpty()) {
                         for (String key : secList) {
-                            Quest quest = new Quest(type, key);
-                            quest.setAmount(cache.getInt("Quests.Daily."+type+"."+key+".Amount"));
-                            quest.setTime(cache.getInt("Quests.Daily."+type+"."+key+".Time"));
+                            Quest quest = new Quest(type, key, cache.getInt("Quests.Daily."+type+"."+key+".Amount"), cache.getInt("Quests.Daily."+type+"."+key+".Time"));
 
                             this.dailyQuests.put(key.toLowerCase(), quest);
                         }
@@ -52,7 +50,7 @@ public class QuestsManager {
                     Set<String> secList = cache.getConfigurationSection("Quests.Weekly."+type).getKeys(false);
                     if (!secList.isEmpty()) {
                         for (String key : secList) {
-                            Quest quest = new Quest(type, key);
+                            Quest quest = new Quest(type, key, cache.getInt("Quests.Weekly."+type+"."+key+".Amount"), cache.getInt("Quests.Weekly."+type+"."+key+".Time"));
                             quest.setAmount(cache.getInt("Quests.Weekly."+type+"."+key+".Amount"));
                             quest.setTime(cache.getInt("Quests.Weekly."+type+"."+key+".Time"));
 
@@ -65,7 +63,7 @@ public class QuestsManager {
     }
 
     public void generateQuests() {
-        YamlConfig date = new YamlConfig("cache.yml");
+        YamlConfig date = new YamlConfig("cache");
 
         this.dailyQuests.clear();
         this.weeklyQuests.clear();
@@ -85,9 +83,7 @@ public class QuestsManager {
                             int random = new Random().nextInt(secList.size());
                             String key = secList.get(random);
 
-                            Quest quest = new Quest(QuestType.Killing, key);
-                            quest.setAmount(config.getInt("Quests.Daily."+type+"."+key+".Amount"));
-                            quest.setTime(config.getInt("Quests.Daily."+type+"."+key+".Time"));
+                            Quest quest = new Quest(type, key, config.getInt("Quests.Daily."+type+"."+key+".Amount"), config.getInt("Quests.Daily."+type+"."+key+".Time"));
 
                             this.dailyQuests.put(key.toLowerCase(), quest);
                         }
@@ -109,9 +105,7 @@ public class QuestsManager {
                             int random = new Random().nextInt(secList.size());
                             String key = secList.get(random);
 
-                            Quest quest = new Quest(QuestType.Killing, key);
-                            quest.setAmount(config.getInt("Quests.Weekly."+type+"."+key+".Amount"));
-                            quest.setTime(config.getInt("Quests.Weekly."+type+"."+key+".Time"));
+                            Quest quest = new Quest(type, key, config.getInt("Quests.Weekly."+type+"."+key+".Amount"), config.getInt("Quests.Weekly."+type+"."+key+".Time"));
 
                             this.weeklyQuests.put(key.toLowerCase(), quest);
                         }

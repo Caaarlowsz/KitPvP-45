@@ -84,7 +84,6 @@ public abstract class TinyProtocol {
             instance.getLogger().info("Attempting to inject into netty");
             registerChannelHandler();
             registerPlayers(plugin);
-            injected = true;
         } catch (IllegalArgumentException ex) {
             // Damn you, late bind
             instance.getLogger().warning("Attempting to delay injection");
@@ -99,6 +98,7 @@ public abstract class TinyProtocol {
                 }
             }.runTask(plugin);
         }
+        injected = true;
     }
 
     public boolean isInjected() {
@@ -156,8 +156,10 @@ public abstract class TinyProtocol {
 
             @EventHandler(priority = EventPriority.MONITOR)
             public final void onPlayerLogin(PlayerLoginEvent event) {
-                if (closed)
+                if (closed || !injected) {
+                    event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Loading server...");
                     return;
+                }
 
                 Channel channel = getChannel(event.getPlayer());
 
@@ -170,7 +172,7 @@ public abstract class TinyProtocol {
             @EventHandler(priority = EventPriority.MONITOR)
             public final void onPlayerAsyncPreLogin(AsyncPlayerPreLoginEvent event) {
                 if (!injected) {
-                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "TinyProtocol not injected yet");
+                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "Loading server...");
                 }
             }
 

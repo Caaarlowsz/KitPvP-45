@@ -40,6 +40,16 @@ public class PlayerData {
     }
 
     public void updateKDR() {
-        this.killtodeathratio = (double)this.kills/(double)this.deaths;
+        if(this.deaths > 0 && this.kills > 0) {
+            double kdr = (double) this.kills / (double) this.deaths;
+            if(kdr < 0.02) {
+                kdr = -kdr;
+            }
+            this.killtodeathratio = kdr;
+        } else if(this.deaths > 0 && this.kills == 0) {
+            this.killtodeathratio = -this.deaths;
+        } else if(this.deaths == 0 && this.kills > 0){
+            this.killtodeathratio = this.kills;
+        }
     }
 }

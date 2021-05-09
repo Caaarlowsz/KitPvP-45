@@ -139,6 +139,85 @@ public class CoinsCmd implements CommandExecutor {
                 return true;
             }
             return true;
+        } else {
+            FileConfiguration messages = KitPvP.getConfigManager().getMessages();
+            if(args.length == 3) {
+                if (args[0].equalsIgnoreCase("give")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if (target != null) {
+                        PlayerData targetData = KitPvP.getPlayerManager().getPlayerData(target);
+                        if (targetData != null) {
+                            if (this.isInt(args[2])) {
+                                targetData.setCoins(targetData.getCoins() + Integer.parseInt(args[2]));
+                                target.sendMessage(KitPvP.Color(messages.getString("CoinsReceived").replace("%amount%", args[2])));
+                                commandSender.sendMessage(KitPvP.Color(messages.getString("GiveedCoins").replace("%amount%", args[2]).replace("%player%", target.getName())));
+                                return true;
+                            } else {
+                                commandSender.sendMessage(KitPvP.Color("&cYou must enter the amount of Coins"));
+                            }
+                            return true;
+                        }
+                        return true;
+                    } else {
+                        commandSender.sendMessage(KitPvP.Color(messages.getString("OfflinePlayer")));
+                    }
+                    return true;
+                }
+                if (args[0].equalsIgnoreCase("take")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if (target != null) {
+                        PlayerData targetData = KitPvP.getPlayerManager().getPlayerData(target);
+                        if (targetData != null) {
+                            if (this.isInt(args[2])) {
+                                int amount = Integer.parseInt(args[2]);
+                                if (amount > targetData.getCoins()) {
+                                    targetData.setCoins(0);
+                                } else {
+                                    targetData.setCoins(targetData.getCoins() - amount);
+                                }
+                                target.sendMessage(KitPvP.Color(messages.getString("CoinsRemove").replace("%amount%", String.valueOf(amount))));
+                                commandSender.sendMessage(KitPvP.Color(messages.getString("TakeCoins").replace("%amount%", String.valueOf(amount)).replace("%player%", target.getName())));
+                                return true;
+                            } else {
+                                commandSender.sendMessage(KitPvP.Color("&cYou must enter the amount of Coins"));
+                            }
+                            return true;
+                        }
+                        return true;
+                    } else {
+                        commandSender.sendMessage(KitPvP.Color(messages.getString("OfflinePlayer")));
+                    }
+                    return true;
+                }
+                commandSender.sendMessage(KitPvP.Color("&aUse: /Coins give [Player] [Amount]"));
+                commandSender.sendMessage(KitPvP.Color("&aUse: /Coins take [Player] [Amount]"));
+                commandSender.sendMessage(KitPvP.Color("&aUse: /Coins reset [Player]"));
+                return true;
+            }
+            if(args.length == 2) {
+                if(args[0].equalsIgnoreCase("reset")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if(target != null) {
+                        PlayerData targetData = KitPvP.getPlayerManager().getPlayerData(target);
+                        if(targetData != null) {
+                            targetData.setCoins(0);
+                            commandSender.sendMessage(KitPvP.Color("&cYou reset "+target.getName()+" Coins"));
+                            return true;
+                        }
+                        return true;
+                    } else {
+                        commandSender.sendMessage(KitPvP.Color(messages.getString("OfflinePlayer")));
+                    }
+                    return true;
+                }
+                commandSender.sendMessage(KitPvP.Color("&aUse: /Coins give [Player] [Amount]"));
+                commandSender.sendMessage(KitPvP.Color("&aUse: /Coins take [Player] [Amount]"));
+                commandSender.sendMessage(KitPvP.Color("&aUse: /Coins reset [Player]"));
+                return true;
+            }
+            commandSender.sendMessage(KitPvP.Color("&aUse: /Coins give [Player] [Amount]"));
+            commandSender.sendMessage(KitPvP.Color("&aUse: /Coins take [Player] [Amount]"));
+            commandSender.sendMessage(KitPvP.Color("&aUse: /Coins reset [Player]"));
         }
         return false;
     }
